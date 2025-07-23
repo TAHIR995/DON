@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WADUDU MEMBERSHIP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(WhatsApp\ Image\ 2025-07-23\ at\ 11.35.13_89ab8786.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            justify-content: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .btn-container {
+            margin-bottom: 40px;
+        }
+        button.btn {
+            background-color: #45a049;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button.btn:hover {
+            background-color: #3c8d40;
+        }
+        /* Popup form styles */
+        .form-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 90%;
+            max-width: 400px;
+            background: white;
+            padding: 30px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+        }
+        .form-popup h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #555;
+        }
+        .form-container input,
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .form-container textarea {
+            resize: vertical;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-submit {
+            background-color: #45a049;
+            color: white;
+            margin-bottom: 10px;
+        }
+        .btn-submit:hover {
+            background-color: #3c8d40;
+        }
+        .btn-cancel {
+            background-color: #e74c3c;
+            color: white;
+        }
+        .btn-cancel:hover {
+            background-color: #c0392b;
+        }
+        /* Overlay background when form is open */
+        .overlay {
+            display: none;
+            position: fixed;
+            top:0;
+            left:0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            z-index: 900;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>WADUDU MEMBERSHIP</h1>
+
+
+    <div class="btn-container">
+        <button class="btn" onclick="openForm('login')">Login</button>
+        <button class="btn" onclick="openForm('register')">Register</button>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay" class="overlay" onclick="closeForms()"></div>
+
+    <!-- Login Form -->
+    <div id="loginForm" class="form-popup" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+        <div class="form-container">
+            <h2 id="loginTitle">Login</h2>
+            <form id="loginFormElement" onsubmit="handleLogin(event)">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" name="email" placeholder="Enter your email" required />
+
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required />
+
+                <button type="submit" class="btn-submit">Login</button>
+                <button type="button" class="btn-cancel" onclick="closeForms()">Close</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Form -->
+    <div id="registerForm" class="form-popup" role="dialog" aria-modal="true" aria-labelledby="registerTitle">
+        <div class="form-container">
+            <h2 id="registerTitle">Register</h2>
+            <form id="registerFormElement" onsubmit="handleRegister(event)">
+                <label for="registerFullName">Full Name</label>
+                <input type="text" id="registerFullName" name="fullName" placeholder="Enter your full name" required />
+
+                <label for="registerPhone">Phone Number</label>
+                <input type="tel" id="registerPhone" name="phone" placeholder="Enter your phone number" required pattern="[0-9]{10,15}" title="Enter a valid phone number" />
+
+                <label for="registerPassword">Password</label>
+                <input type="password" id="registerPassword" name="password" placeholder="Enter your password" required />
+
+                <label for="registerConfirmPassword">Confirm Password</label>
+                <input type="password" id="registerConfirmPassword" name="confirmPassword" placeholder="Confirm your password" required />
+
+                <label for="registerReason">Why do you want to join?</label>
+                <textarea id="registerReason" name="reason" rows="4" placeholder="Enter your reason..." required></textarea>
+
+                <button type="submit" class="btn-submit">Register</button>
+                <button type="button" class="btn-cancel" onclick="closeForms()">Close</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openForm(formType) {
+            document.getElementById('overlay').style.display = 'block';
+            if (formType === 'login') {
+                document.getElementById('loginForm').style.display = 'block';
+            } else if (formType === 'register') {
+                document.getElementById('registerForm').style.display = 'block';
+            }
+        }
+
+        function closeForms() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'none';
+        }
+
+        // Example handlers for form submission (replace with actual logic)
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = event.target.email.value.trim();
+            const password = event.target.password.value.trim();
+
+            // Simple validation example (you can add more)
+            if (email && password) {
+                alert(`Login successful!\nEmail: ${email}`);
+                closeForms();
+            }
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+            const fullName = event.target.fullName.value.trim();
+            const phone = event.target.phone.value.trim();
+            const password = event.target.password.value;
+            const confirmPassword = event.target.confirmPassword.value;
+            const reason = event.target.reason.value.trim();
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return;
+            }
+
+            if (fullName && phone && password && reason) {
+                alert(`Registration successful!\nName: ${fullName}\nPhone: ${phone}`);
+                closeForms();
+            }
+        }
+    </script>
+
+</body>
+</html>
